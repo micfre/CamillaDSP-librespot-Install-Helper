@@ -2,6 +2,19 @@
 
 An interactive terminal-based installation and update helper for CamillaDSP and librespot on Ubuntu/Debian AMD64 systems.
 
+## Project Overview
+- Simplify installation and configuration of CamillaDSP (digital signal processing for audio)
+- Simplify installation and configuration of librespot (Spotify Connect client)
+- Provide a user-friendly terminal interface for system configuration
+- Automate systemd service setup and management
+- Handle audio device enumeration and configuration
+
+## Tech Stack
+- **Language**: Python 3.12+ (compatible with Python 3.11+)
+- **UI**: Rich library for terminal interface
+- **Target OS**: Ubuntu/Debian Linux on AMD64
+- **Development**: VS Code with WSL support
+
 ## Features
 
 - 🎯 **Interactive menu interface** - Easy-to-use numbered menu navigation with organized sections
@@ -13,6 +26,86 @@ An interactive terminal-based installation and update helper for CamillaDSP and 
 - 🔐 **OAuth integration** - Set up librespot credentials with OAuth/PKCE
 - 🚀 **Systemd services** - Start all services (CamillaDSP, GUI, librespot) automatically
 - ✅ **Enhanced verification** - Check services, web ports, and OAuth credentials
+
+## Prerequisites
+
+- Ubuntu/Debian-based Linux distribution (AMD64)
+- Python 3.12+ installed
+- Sudo access
+- Internet connection
+
+## Development Setup
+
+### Quick Development Start
+```bash
+# Clone and setup
+cd /path/to/project
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+chmod +x clih.py
+
+# Run the application
+./clih.py
+
+### Development Dependencies
+The project requires the following system dependencies:
+- `libyaml-dev` (for YAML processing)
+- Python development headers
+
+Install on Ubuntu/Debian:
+```bash
+sudo apt-get update
+sudo apt-get install -y libyaml-dev python3-dev
+```
+
+### Project Structure
+```
+/
+├── clih.py                  # Main entry point
+├── src/
+│   ├── ui/                  # Terminal UI components
+│   ├── installers/          # Installation modules
+│   ├── config/              # Configuration file generators
+│   ├── utils/               # Utility functions
+│   └── services/            # Systemd service management
+├── requirements.txt         # Python dependencies
+├── .vscode/                 # VS Code configuration
+│   ├── launch.json         # Debug configurations
+│   ├── tasks.json          # Development tasks
+│   └── settings.json       # Editor settings
+└── .gitattributes          # Git line ending configuration
+```
+
+### Development Commands
+
+#### Using VS Code Tasks (Ctrl+Shift+P -> "Tasks: Run Task")
+- **Run CLIH**: Execute the main application
+- **Install Dependencies**: Install Python requirements
+- **Set Execute Permissions**: Make scripts executable
+
+#### Manual Commands
+```bash
+# Activate virtual environment
+source .venv/bin/activate
+
+# Run main application
+./clih.py
+# or
+python3 clih.py
+
+# Install/update dependencies
+pip install -r requirements.txt
+
+# Make executable
+chmod +x clih.py
+```
+
+### Debugging
+Use VS Code debug configurations:
+- **"CLIH - Run Main"**: Debug the main application with integrated terminal
+- **"CLIH - Debug with Console"**: Debug with detailed output
+- **"CLIH - External Terminal"**: Run in external terminal for full interaction
 
 ## Prerequisites
 
@@ -156,3 +249,23 @@ For issues with:
 - CamillaDSP: See the [official repository](https://github.com/HEnquist/camilladsp)
 - librespot: See the [official repository](https://github.com/librespot-org/librespot)
 - This helper: Open an issue in this repository
+
+## Architecture
+
+- Modular design with separate concerns (installation, configuration, UI)
+- Python-based for cross-platform compatibility
+- Relies on system tools (apt, systemd, rust/cargo)
+- Supports both direct execution and development environments
+
+## User Preferences
+
+- Prefer clear terminal output with visual feedback
+- Interactive menu interface (numbered options, clean layout)
+- Automated workflows where possible, but ask for user input when needed
+
+## Contributing
+
+1. Ensure Python 3.12+ is available
+2. Set up virtual environment as described above
+3. Use VS Code with recommended extensions
+4. Follow existing code style and structure
