@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Demo mode for Audio Helper - shows the UI without requiring interaction
+Demo mode for CLIH - shows the UI without requiring interaction
 """
 
 import sys
@@ -23,7 +23,7 @@ def clear_screen():
 def print_header():
     header = Text()
     header.append("╔════════════════════════════════════════════════════════════════╗\n", style="cyan bold")
-    header.append("║   Audio Helper - CamillaDSP & librespot Installation Helper   ║\n", style="cyan bold")
+    header.append("║         CLIH - CamillaDSP librespot Install Helper            ║\n", style="cyan bold")
     header.append("╚════════════════════════════════════════════════════════════════╝", style="cyan bold")
     console.print(header)
     console.print()

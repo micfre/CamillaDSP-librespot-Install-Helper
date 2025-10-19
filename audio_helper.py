@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Audio Helper - Installation and Update Helper for CamillaDSP and librespot
+CLIH - CamillaDSP librespot Install Helper
 Main entry point for the application
 """
 

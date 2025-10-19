@@ -38,7 +38,7 @@ class MainUI:
     def print_header(self):
         header = Text()
         header.append("╔════════════════════════════════════════════════════════════════╗\n", style="cyan bold")
-        header.append("║   Audio Helper - CamillaDSP & librespot Installation Helper   ║\n", style="cyan bold")
+        header.append("║         CLIH - CamillaDSP librespot Install Helper            ║\n", style="cyan bold")
         header.append("╚════════════════════════════════════════════════════════════════╝", style="cyan bold")
         self.console.print(header)
         self.console.print()
@@ -67,22 +67,31 @@ class MainUI:
             menu.add_column("Option", style="yellow bold")
             menu.add_column("Description", style="white")
             
+            menu.add_row("", "[bold cyan]── Install/Update ──[/bold cyan]")
+            menu.add_row("B)", "Batch Install All (steps 1-4)")
             menu.add_row("1)", "Package Manager Setup")
             menu.add_row("2)", "Install/Update System Dependencies")
             menu.add_row("3)", "Install/Update CamillaDSP")
             menu.add_row("4)", "Install/Update librespot")
+            menu.add_row("", "")
+            menu.add_row("", "[bold cyan]── Configure ──[/bold cyan]")
             menu.add_row("5)", "Configure Audio Devices")
-            menu.add_row("6)", "Generate Configuration Files")
+            menu.add_row("6)", "Generate/Review Configuration Files")
             menu.add_row("7)", "Setup librespot Credentials (OAuth)")
-            menu.add_row("8)", "Setup Systemd Services")
+            menu.add_row("", "")
+            menu.add_row("", "[bold cyan]── Run ──[/bold cyan]")
+            menu.add_row("8)", "Setup/Start Systemd Services")
             menu.add_row("9)", "Verify Installation")
+            menu.add_row("", "")
             menu.add_row("Q)", "Quit")
             
             self.console.print(Panel(menu, title="Main Menu", border_style="green"))
             
             choice = self.console.input("\n[yellow bold]Select an option:[/yellow bold] ").strip().upper()
             
-            if choice == '1':
+            if choice == 'B':
+                self.batch_install()
+            elif choice == '1':
                 self.package_manager_menu()
             elif choice == '2':
                 self.install_dependencies()
@@ -93,7 +102,7 @@ class MainUI:
             elif choice == '5':
                 self.configure_audio()
             elif choice == '6':
-                self.generate_configs()
+                self.generate_review_configs()
             elif choice == '7':
                 self.setup_librespot_credentials()
             elif choice == '8':
@@ -101,11 +110,42 @@ class MainUI:
             elif choice == '9':
                 self.verify_installation()
             elif choice == 'Q':
-                self.console.print("\n[green]Thank you for using Audio Helper! Goodbye![/green]")
+                self.console.print("\n[green]Thank you for using CLIH! Goodbye![/green]")
                 sys.exit(0)
             else:
                 self.console.print("[red]Invalid choice. Please try again.[/red]")
                 self.console.input("\nPress Enter to continue...")
+    
+    def batch_install(self):
+        """Run steps 1-4 sequentially for quick setup"""
+        self.clear_screen()
+        self.print_header()
+        self.console.print("[bold green]Batch Install - Running Steps 1-4 Sequentially[/bold green]\n")
+        
+        self.console.print("[cyan]Step 1: Installing system dependencies...[/cyan]")
+        self.dep_installer.install_all()
+        self.console.print()
+        
+        self.console.print("[cyan]Step 2: Installing Package Manager (optional - skip or choose)...[/cyan]")
+        choice = self.console.input("Install package manager? (1=venv, 2=poetry, 3=conda, S=skip): ").strip()
+        if choice == '1':
+            self.pkg_installer.install_venv()
+        elif choice == '2':
+            self.pkg_installer.install_poetry()
+        elif choice == '3':
+            self.pkg_installer.install_conda()
+        self.console.print()
+        
+        self.console.print("[cyan]Step 3: Installing CamillaDSP components...[/cyan]")
+        self.camilla_installer.install_all()
+        self.console.print()
+        
+        self.console.print("[cyan]Step 4: Installing librespot...[/cyan]")
+        self.librespot_installer.install_from_cargo()
+        self.console.print()
+        
+        self.console.print("[green]✓ Batch installation complete![/green]")
+        self.console.input("\nPress Enter to continue...")
     
     def package_manager_menu(self):
         self.clear_screen()
@@ -217,11 +257,12 @@ class MainUI:
         self.audio_mgr.select_device()
         self.console.input("\nPress Enter to continue...")
     
-    def generate_configs(self):
+    def generate_review_configs(self):
+        """Generate/Review Configuration Files with edit capability"""
         self.clear_screen()
         self.print_header()
-        self.console.print("[cyan]Generating configuration files...[/cyan]\n")
-        self.config_gen.generate_all()
+        self.console.print("[cyan]Generate/Review Configuration Files[/cyan]\n")
+        self.config_gen.generate_all_with_review()
         self.console.input("\nPress Enter to continue...")
     
     def setup_librespot_credentials(self):
@@ -232,10 +273,11 @@ class MainUI:
         self.console.input("\nPress Enter to continue...")
     
     def setup_systemd(self):
+        """Setup and start ALL systemd services"""
         self.clear_screen()
         self.print_header()
-        self.console.print("[cyan]Setting up systemd services...[/cyan]\n")
-        self.systemd_mgr.setup_all()
+        self.console.print("[cyan]Setting up and starting systemd services...[/cyan]\n")
+        self.systemd_mgr.setup_and_start_all()
         self.console.input("\nPress Enter to continue...")
     
     def verify_installation(self):
