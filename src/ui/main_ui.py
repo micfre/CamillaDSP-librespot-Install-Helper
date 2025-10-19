@@ -122,11 +122,7 @@ class MainUI:
         self.print_header()
         self.console.print("[bold green]Batch Install - Running Steps 1-4 Sequentially[/bold green]\n")
         
-        self.console.print("[cyan]Step 1: Installing system dependencies...[/cyan]")
-        self.dep_installer.install_all()
-        self.console.print()
-        
-        self.console.print("[cyan]Step 2: Installing Package Manager (optional - skip or choose)...[/cyan]")
+        self.console.print("[cyan]Step 1: Package Manager Setup (optional - skip or choose)...[/cyan]")
         choice = self.console.input("Install package manager? (1=venv, 2=poetry, 3=conda, S=skip): ").strip()
         if choice == '1':
             self.pkg_installer.install_venv()
@@ -134,6 +130,10 @@ class MainUI:
             self.pkg_installer.install_poetry()
         elif choice == '3':
             self.pkg_installer.install_conda()
+        self.console.print()
+        
+        self.console.print("[cyan]Step 2: Installing system dependencies...[/cyan]")
+        self.dep_installer.install_all()
         self.console.print()
         
         self.console.print("[cyan]Step 3: Installing CamillaDSP components...[/cyan]")

@@ -81,7 +81,7 @@ def demo_status():
     console.print()
 
 def main():
-    console.print("\n[bold green]Audio Helper Demo[/bold green]")
+    console.print("\n[bold green]CLIH Demo[/bold green]")
     console.print("[dim]This is a demonstration of the UI - no actual installation will occur[/dim]\n")
     time.sleep(1)
     
