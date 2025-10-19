@@ -4,7 +4,7 @@ An interactive terminal-based installation and update helper for CamillaDSP and 
 
 ## Features
 
-- 🎯 **KIAUH-style menu interface** - Easy-to-use numbered menu navigation with organized sections
+- 🎯 **Interactive menu interface** - Easy-to-use numbered menu navigation with organized sections
 - ⚡ **Batch installation** - Run steps 1-4 automatically for quick setup
 - 📦 **Package manager support** - Choose between venv, Poetry, or Conda
 - 🔧 **Automated installation** - Handles all dependencies and build processes
@@ -28,7 +28,7 @@ git clone <repository-url>
 cd <repository-directory>
 
 # Run the helper
-./audio_helper.py
+./clih.py
 ```
 
 ## What Gets Installed
@@ -52,7 +52,7 @@ cd <repository-directory>
 ## Menu Options
 
 ### Install/Update
-- **B)** **Batch Install All** - Run steps 1-4 sequentially (recommended for new installs)
+- **B)** **Install/Update All** - Run steps 1-4 sequentially (recommended for new installs)
 - **1)** Package Manager Setup - Install venv, Poetry, or Conda
 - **2)** Install/Update System Dependencies - Install all required system packages
 - **3)** Install/Update CamillaDSP - Install CamillaDSP and components
@@ -145,7 +145,6 @@ pactl list sinks  # List PulseAudio/PipeWire devices
 - [CamillaDSP](https://github.com/HEnquist/camilladsp)
 - [CamillaDSP GUI Backend](https://github.com/HEnquist/camillagui-backend)
 - [librespot](https://github.com/librespot-org/librespot)
-- [KIAUH](https://github.com/dw-0/kiauh) (UI inspiration)
 
 ## License
 

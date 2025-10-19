@@ -1,5 +1,5 @@
 """
-Main UI Module - KIAUH-style terminal interface
+Main UI Module - Terminal interface for CLIH
 """
 
 import os
@@ -18,6 +18,7 @@ from src.utils.audio_devices import AudioDeviceManager
 from src.config.generator import ConfigGenerator
 from src.services.systemd_manager import SystemdManager
 from src.utils.system_check import SystemChecker
+from src.__version__ import __version__
 
 
 class MainUI:
@@ -68,7 +69,7 @@ class MainUI:
             menu.add_column("Description", style="white")
             
             menu.add_row("", "[bold cyan]── Install/Update ──[/bold cyan]")
-            menu.add_row("B)", "Batch Install All (steps 1-4)")
+            menu.add_row("B)", "Install/Update All")
             menu.add_row("1)", "Package Manager Setup")
             menu.add_row("2)", "Install/Update System Dependencies")
             menu.add_row("3)", "Install/Update CamillaDSP")
@@ -86,8 +87,9 @@ class MainUI:
             menu.add_row("Q)", "Quit")
             
             self.console.print(Panel(menu, title="Main Menu", border_style="green"))
+            self.console.print(f"[dim]Version {__version__}[/dim]\n")
             
-            choice = self.console.input("\n[yellow bold]Select an option:[/yellow bold] ").strip().upper()
+            choice = self.console.input("[yellow bold]Select an option:[/yellow bold] ").strip().upper()
             
             if choice == 'B':
                 self.batch_install()

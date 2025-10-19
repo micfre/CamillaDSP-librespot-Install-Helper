@@ -10,6 +10,7 @@ import time
 sys.path.insert(0, os.path.dirname(__file__))
 
 from rich.console import Console
+from src.__version__ import __version__
 from rich.panel import Panel
 from rich.text import Text
 from rich.table import Table
@@ -39,7 +40,7 @@ def demo_main_menu():
     table.add_column("Description", style="white")
     
     table.add_row("", "[bold cyan]── Install/Update ──[/bold cyan]")
-    table.add_row("B)", "Batch Install All (steps 1-4)")
+    table.add_row("B)", "Install/Update All")
     table.add_row("1)", "Package Manager Setup")
     table.add_row("2)", "Install/Update System Dependencies")
     table.add_row("3)", "Install/Update CamillaDSP")
@@ -57,7 +58,7 @@ def demo_main_menu():
     table.add_row("Q)", "Quit")
     
     console.print(Panel(table, title="Main Menu", border_style="green"))
-    console.print()
+    console.print(f"[dim]Version {__version__}[/dim]\n")
 
 def demo_status():
     status_table = Table(box=box.SIMPLE, show_header=False, padding=(0, 1))
@@ -92,7 +93,7 @@ def main():
     
     console.print("[cyan]This is an interactive terminal application designed for Ubuntu/Debian systems.[/cyan]")
     console.print("[cyan]On a real system, you would:[/cyan]")
-    console.print("  1. Run [yellow]./audio_helper.py[/yellow]")
+    console.print("  1. Run [yellow]./clih.py[/yellow]")
     console.print("  2. Navigate using numbered menu options")
     console.print("  3. Install CamillaDSP and librespot components")
     console.print("  4. Configure audio devices and services")

@@ -1,7 +1,7 @@
 # CLIH - CamillaDSP librespot Install Helper
 
 ## Project Overview
-An interactive terminal-based installation and update helper for CamillaDSP and librespot on Ubuntu/Debian AMD64 systems. Inspired by KIAUH (Klipper Installation And Update Helper) for its user interface design.
+An interactive terminal-based installation and update helper for CamillaDSP and librespot on Ubuntu/Debian AMD64 systems.
 
 ## Purpose
 - Simplify installation and configuration of CamillaDSP (digital signal processing for audio)
@@ -18,9 +18,9 @@ An interactive terminal-based installation and update helper for CamillaDSP and 
 ## Project Structure
 ```
 /
-├── audio_helper.py          # Main entry point
+├── clih.py                  # Main entry point
 ├── src/
-│   ├── ui/                  # Terminal UI components (KIAUH-style)
+│   ├── ui/                  # Terminal UI components
 │   ├── installers/          # Installation modules
 │   ├── config/              # Configuration file generators
 │   ├── utils/               # Utility functions
@@ -46,10 +46,14 @@ An interactive terminal-based installation and update helper for CamillaDSP and 
 - 2025-10-19: Added batch install (steps 1-4), config review/edit with backup
 - 2025-10-19: Enhanced status to check all services, ports, and OAuth credentials
 - 2025-10-19: Reorganized menu with Install/Update, Configure, and Run sections
+- 2025-10-19: Renamed main file from audio_helper.py to clih.py
+- 2025-10-19: Added versioning system (currently v1.0.0) displayed below Main Menu
+- 2025-10-19: Removed KIAUH references from all documentation and UI
+- 2025-10-19: Renamed batch install to "Install/Update All" for clarity
 
 ## User Preferences
 - Prefer clear terminal output with visual feedback
-- KIAUH-style menu interface (numbered options, clean layout)
+- Interactive menu interface (numbered options, clean layout)
 - Automated workflows where possible, but ask for user input when needed
 
 ## Architecture
