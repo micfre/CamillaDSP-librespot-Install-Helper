@@ -38,7 +38,7 @@ class MainUI:
     def print_header(self):
         header = Text()
         header.append("╔════════════════════════════════════════════════════════════════╗\n", style="cyan bold")
-        header.append("║         CLIH - CamillaDSP librespot Install Helper            ║\n", style="cyan bold")
+        header.append("║         CLIH - CamillaDSP librespot Install Helper             ║\n", style="cyan bold")
         header.append("╚════════════════════════════════════════════════════════════════╝", style="cyan bold")
         self.console.print(header)
         self.console.print()

@@ -23,7 +23,7 @@ def clear_screen():
 def print_header():
     header = Text()
     header.append("╔════════════════════════════════════════════════════════════════╗\n", style="cyan bold")
-    header.append("║         CLIH - CamillaDSP librespot Install Helper            ║\n", style="cyan bold")
+    header.append("║         CLIH - CamillaDSP librespot Install Helper             ║\n", style="cyan bold")
     header.append("╚════════════════════════════════════════════════════════════════╝", style="cyan bold")
     console.print(header)
     console.print()
