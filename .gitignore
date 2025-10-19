@@ -31,8 +31,8 @@ env.bak/
 venv.bak/
 
 # IDE
-.vscode/
-.idea/
+.vscode/settings.json  # Exclude personal VS Code settings
+.idea/                 # Exclude JetBrains IDEs
 *.swp
 *.swo
 *~

@@ -1,0 +1,59 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "CLIH - Run Main",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/clih.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "args": []
+    },
+    {
+      "name": "CLIH - Debug with Console",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/clih.py",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "args": [],
+      "stopOnEntry": false,
+      "redirectOutput": false
+    },
+    {
+      "name": "CLIH - External Terminal",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/clih.py",
+      "console": "externalTerminal",
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "args": []
+    },
+    {
+      "name": "Demo Mode",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/demo.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "args": []
+    }
+  ]
+}

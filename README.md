@@ -45,6 +45,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 chmod +x clih.py
 
+# Setup VS Code (optional)
+cp .vscode/settings.json.template .vscode/settings.json
+
 # Run the application
 ./clih.py
 
@@ -241,7 +244,8 @@ pactl list sinks  # List PulseAudio/PipeWire devices
 
 ## License
 
-This project is provided as-is for personal use.
+CC BY-NC-SA 4.0
+https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 ## Support
 
@@ -249,23 +253,3 @@ For issues with:
 - CamillaDSP: See the [official repository](https://github.com/HEnquist/camilladsp)
 - librespot: See the [official repository](https://github.com/librespot-org/librespot)
 - This helper: Open an issue in this repository
-
-## Architecture
-
-- Modular design with separate concerns (installation, configuration, UI)
-- Python-based for cross-platform compatibility
-- Relies on system tools (apt, systemd, rust/cargo)
-- Supports both direct execution and development environments
-
-## User Preferences
-
-- Prefer clear terminal output with visual feedback
-- Interactive menu interface (numbered options, clean layout)
-- Automated workflows where possible, but ask for user input when needed
-
-## Contributing
-
-1. Ensure Python 3.12+ is available
-2. Set up virtual environment as described above
-3. Use VS Code with recommended extensions
-4. Follow existing code style and structure
