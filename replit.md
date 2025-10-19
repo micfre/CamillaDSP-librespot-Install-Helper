@@ -1,4 +1,4 @@
-# Audio Helper - CamillaDSP and librespot Installation Helper
+# CLIH - CamillaDSP librespot Install Helper
 
 ## Project Overview
 An interactive terminal-based installation and update helper for CamillaDSP and librespot on Ubuntu/Debian AMD64 systems. Inspired by KIAUH (Klipper Installation And Update Helper) for its user interface design.
@@ -29,18 +29,23 @@ An interactive terminal-based installation and update helper for CamillaDSP and 
 ```
 
 ## Key Features
-1. Package manager selection (venv, poetry, conda)
-2. Dependency installation for CamillaDSP and librespot
-3. CamillaDSP component installation (core, gui-backend, pycamilladsp, pycamilladsp-plot)
-4. librespot installation and OAuth setup
-5. Audio device enumeration and selection
-6. Configuration file generation
-7. Systemd daemon setup
-8. Installation verification
+1. **Batch installation** - Run steps 1-4 automatically for quick setup
+2. **Package manager selection** - venv, poetry, conda
+3. **Dependency installation** - Automated system dependency setup
+4. **CamillaDSP installation** - Core, GUI backend, pycamilladsp, pycamilladsp-plot
+5. **librespot installation** - Spotify Connect with OAuth/PKCE
+6. **Audio device management** - Enumeration and selection
+7. **Config review & backup** - Generate, review, edit with automatic backup
+8. **Systemd service management** - Setup and start all services (CamillaDSP, GUI, librespot)
+9. **Enhanced verification** - Check services, web ports, and OAuth credentials
 
 ## Recent Changes
 - 2025-10-19: Initial project setup with Python 3.11
 - 2025-10-19: Created directory structure and project foundation
+- 2025-10-19: Renamed to "CLIH - CamillaDSP librespot Install Helper"
+- 2025-10-19: Added batch install (steps 1-4), config review/edit with backup
+- 2025-10-19: Enhanced status to check all services, ports, and OAuth credentials
+- 2025-10-19: Reorganized menu with Install/Update, Configure, and Run sections
 
 ## User Preferences
 - Prefer clear terminal output with visual feedback

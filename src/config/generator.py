@@ -4,8 +4,11 @@ Configuration file generator for CamillaDSP and librespot
 
 import os
 import yaml
+import shutil
+from datetime import datetime
 from rich.console import Console
-from rich.prompt import Prompt, IntPrompt
+from rich.prompt import Prompt, IntPrompt, Confirm
+from rich.syntax import Syntax
 
 from src.utils.audio_devices import AudioDeviceManager
 
@@ -35,6 +38,72 @@ class ConfigGenerator:
         self.generate_librespot_config(device_config)
         
         console.print("\n[bold green]✓ All configuration files generated![/bold green]")
+    
+    def backup_config_file(self, config_file):
+        """Backup existing config file with timestamp"""
+        if os.path.exists(config_file):
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            backup_dir = f"{os.path.dirname(config_file)}/backups"
+            os.makedirs(backup_dir, exist_ok=True)
+            
+            backup_file = f"{backup_dir}/{os.path.basename(config_file)}.{timestamp}.bak"
+            shutil.copy2(config_file, backup_file)
+            console.print(f"[yellow]ℹ Backed up existing config to: {backup_file}[/yellow]")
+            return backup_file
+        return None
+    
+    def generate_all_with_review(self):
+        """Generate all configuration files with review/edit capability"""
+        console.print("[bold green]Generate/Review Configuration Files[/bold green]\n")
+        
+        device_config = self.audio_mgr.load_device_config()
+        if not device_config:
+            console.print("[yellow]No audio device configured. Please configure audio device first.[/yellow]")
+            return
+        
+        configs_to_generate = [
+            ("CamillaDSP", f"{self.configs_dir}/default_config.yml", 
+             lambda: self.generate_camilladsp_config(device_config)),
+            ("GUI Backend", f"{self.camilla_dir}/camillagui/config/camillagui.yml",
+             lambda: self.generate_gui_config()),
+            ("librespot", f"{self.home}/.config/librespot/config.yml",
+             lambda: self.generate_librespot_config(device_config))
+        ]
+        
+        for name, config_path, generator_func in configs_to_generate:
+            console.print(f"\n[cyan]━━━ {name} Configuration ━━━[/cyan]\n")
+            
+            if os.path.exists(config_path):
+                backup = self.backup_config_file(config_path)
+            
+            generator_func()
+            
+            if Confirm.ask(f"\nReview {name} configuration file?", default=True):
+                self.review_config_file(config_path, name)
+        
+        console.print("\n[bold green]✓ Configuration generation complete![/bold green]")
+    
+    def review_config_file(self, config_file, name):
+        """Review and optionally edit a configuration file"""
+        if not os.path.exists(config_file):
+            console.print(f"[red]Config file not found: {config_file}[/red]")
+            return
+        
+        with open(config_file, 'r') as f:
+            content = f.read()
+        
+        console.print(f"\n[bold]Current {name} configuration:[/bold]\n")
+        syntax = Syntax(content, "yaml", theme="monokai", line_numbers=True)
+        console.print(syntax)
+        
+        if Confirm.ask(f"\nEdit this configuration?", default=False):
+            console.print(f"\n[yellow]Opening {config_file} for editing...[/yellow]")
+            console.print("[dim]Use your preferred editor to modify the file.[/dim]")
+            
+            editor = os.environ.get('EDITOR', 'nano')
+            os.system(f"{editor} {config_file}")
+            
+            console.print(f"\n[green]✓ Configuration saved to: {config_file}[/green]")
     
     def generate_camilladsp_config(self, device_config):
         """Generate CamillaDSP configuration file"""

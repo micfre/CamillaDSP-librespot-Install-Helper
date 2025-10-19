@@ -1,17 +1,18 @@
-# Audio Helper - CamillaDSP & librespot Installation Helper
+# CLIH - CamillaDSP librespot Install Helper
 
 An interactive terminal-based installation and update helper for CamillaDSP and librespot on Ubuntu/Debian AMD64 systems.
 
 ## Features
 
-- 🎯 **KIAUH-style menu interface** - Easy-to-use numbered menu navigation
+- 🎯 **KIAUH-style menu interface** - Easy-to-use numbered menu navigation with organized sections
+- ⚡ **Batch installation** - Run steps 1-4 automatically for quick setup
 - 📦 **Package manager support** - Choose between venv, Poetry, or Conda
 - 🔧 **Automated installation** - Handles all dependencies and build processes
 - 🎵 **Audio device management** - Enumerate and select audio devices
-- ⚙️ **Configuration generation** - Create config files with sensible defaults
+- ⚙️ **Config review & backup** - Review, edit, and save configs with automatic backup
 - 🔐 **OAuth integration** - Set up librespot credentials with OAuth/PKCE
-- 🚀 **Systemd services** - Automatically configure services to start on boot
-- ✅ **Installation verification** - Check status and running services
+- 🚀 **Systemd services** - Start all services (CamillaDSP, GUI, librespot) automatically
+- ✅ **Enhanced verification** - Check services, web ports, and OAuth credentials
 
 ## Prerequisites
 
@@ -50,29 +51,38 @@ cd <repository-directory>
 
 ## Menu Options
 
-1. **Package Manager Setup** - Install venv, Poetry, or Conda
-2. **Install/Update System Dependencies** - Install all required system packages
-3. **Install/Update CamillaDSP** - Install CamillaDSP and components
-4. **Install/Update librespot** - Install librespot
-5. **Configure Audio Devices** - Enumerate and select audio output device
-6. **Generate Configuration Files** - Create config files with your settings
-7. **Setup librespot Credentials** - OAuth authentication flow
-8. **Setup Systemd Services** - Configure auto-start services
-9. **Verify Installation** - Check installation status and running services
+### Install/Update
+- **B)** **Batch Install All** - Run steps 1-4 sequentially (recommended for new installs)
+- **1)** Package Manager Setup - Install venv, Poetry, or Conda
+- **2)** Install/Update System Dependencies - Install all required system packages
+- **3)** Install/Update CamillaDSP - Install CamillaDSP and components
+- **4)** Install/Update librespot - Install librespot
+
+### Configure
+- **5)** Configure Audio Devices - Enumerate and select audio output device
+- **6)** Generate/Review Configuration Files - Create, review, and edit configs (with backup)
+- **7)** Setup librespot Credentials (OAuth) - OAuth authentication flow
+
+### Run
+- **8)** Setup/Start Systemd Services - Configure and start all services
+- **9)** Verify Installation - Check services, ports, and OAuth credentials
 
 ## Usage Flow
 
-Recommended installation order:
+### Quick Start (Recommended)
+1. Use **Option B** (Batch Install) to install everything automatically
+2. Use **Option 5** to configure your audio device
+3. Use **Option 6** to generate and review configuration files
+4. Use **Option 7** to set up librespot OAuth credentials
+5. Use **Option 8** to start all services
+6. Use **Option 9** to verify everything is working
 
+### Manual Installation
 1. Start with **Option 2** to install system dependencies
 2. Optionally use **Option 1** to set up your preferred package manager
 3. Use **Option 3** to install CamillaDSP components
 4. Use **Option 4** to install librespot
-5. Use **Option 5** to configure your audio device
-6. Use **Option 6** to generate configuration files
-7. Use **Option 7** to set up librespot credentials (OAuth)
-8. Use **Option 8** to configure systemd services
-9. Use **Option 9** to verify everything is working
+5. Continue with steps 5-9 as above
 
 ## Configuration Files
 

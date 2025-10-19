@@ -81,46 +81,73 @@ class SystemChecker:
         
         self._check_services()
         self._check_ports()
+        self._check_oauth_credentials()
     
     def _check_services(self):
-        """Check running services"""
-        console.print("[bold cyan]Service Status:[/bold cyan]\n")
+        """Check running services status (CamillaDSP, GUI backend, librespot)"""
+        console.print("[bold cyan]Service Status (CamillaDSP, GUI backend, librespot):[/bold cyan]\n")
         
-        services = ['camilladsp', 'camillagui', 'librespot']
+        services = {
+            'camilladsp': 'CamillaDSP',
+            'camillagui': 'GUI Backend',
+            'librespot': 'librespot (Spotify Connect)'
+        }
         
-        for service in services:
+        for service_name, display_name in services.items():
             returncode, stdout, _ = run_command(
-                ['systemctl', 'is-active', f'{service}.service'],
+                ['systemctl', 'is-active', f'{service_name}.service'],
                 check=False,
                 capture=True
             )
             
             if returncode == 0 and stdout.strip() == 'active':
-                console.print(f"  [green]✓[/green] {service} is running")
+                console.print(f"  [green]✓[/green] {display_name} is [green bold]running[/green bold]")
             else:
-                console.print(f"  [yellow]○[/yellow] {service} is not running")
+                console.print(f"  [yellow]○[/yellow] {display_name} is [yellow]not running[/yellow]")
         
         console.print()
     
     def _check_ports(self):
-        """Check if services are listening on expected ports"""
-        console.print("[bold cyan]Port Status:[/bold cyan]\n")
+        """Check if web services are listening on configured ports"""
+        console.print("[bold cyan]Web Service Port Status:[/bold cyan]\n")
         
         ports = {
             '1234': 'CamillaDSP WebSocket',
             '5005': 'CamillaDSP GUI Backend'
         }
         
+        returncode, stdout, _ = run_command(
+            ['ss', '-tln'],
+            check=False,
+            capture=True
+        )
+        
         for port, service in ports.items():
-            returncode, stdout, _ = run_command(
-                ['ss', '-tln'],
-                check=False,
-                capture=True
-            )
-            
-            if f':{port}' in stdout:
-                console.print(f"  [green]✓[/green] {service} listening on port {port}")
+            if returncode == 0 and f':{port}' in stdout:
+                console.print(f"  [green]✓[/green] {service} [green]listening[/green] on port {port}")
+                console.print(f"     [dim]→ http://localhost:{port}[/dim]")
             else:
-                console.print(f"  [yellow]○[/yellow] {service} not listening on port {port}")
+                console.print(f"  [yellow]○[/yellow] {service} [yellow]not listening[/yellow] on port {port}")
+        
+        console.print()
+    
+    def _check_oauth_credentials(self):
+        """Check if valid librespot OAuth credentials exist"""
+        console.print("[bold cyan]librespot/Spotify OAuth Credentials:[/bold cyan]\n")
+        
+        cache_dir = f"{self.home}/.cache/librespot"
+        credentials_file = f"{cache_dir}/credentials.json"
+        
+        if os.path.exists(credentials_file):
+            file_size = os.path.getsize(credentials_file)
+            if file_size > 0:
+                console.print(f"  [green]✓[/green] Valid OAuth credentials found")
+                console.print(f"     [dim]Location: {credentials_file}[/dim]")
+            else:
+                console.print(f"  [yellow]○[/yellow] Credentials file exists but is empty")
+                console.print(f"     [dim]Run step 7 to setup OAuth credentials[/dim]")
+        else:
+            console.print(f"  [yellow]○[/yellow] No OAuth credentials found")
+            console.print(f"     [dim]Run step 7 (Setup librespot Credentials) to authenticate[/dim]")
         
         console.print()
